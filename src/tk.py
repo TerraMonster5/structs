@@ -4,28 +4,13 @@ class ToolBar(tk.Menu):
     def __init__(self, master=None, **kwargs) -> None:
         super().__init__(master, **kwargs)
 
-    def add(self, kind, **kwargs):
+    def add(self, kind, cnf={}, **kwargs):
+        kwargs = cnf or kwargs
         if kind == "cascade":
             if "name" in kwargs.keys():
-                self.add_cascade(kwargs["name"], kwargs["label"], **kwargs)
+                setattr(self, kwargs["name"], ToolBar(self, **kwargs["menukw"]))
+                super().add("cascade", menu=getattr(self, kwargs["name"]), **kwargs["cascadekw"])
             else:
                 raise TypeError
         else:
             super().add(kind, **kwargs)
-
-    def add_cascade(self, name: str, *, menukwargs: dict, cascadekwargs: dict) -> None:
-        if name in ToolBar.__dict__.keys():
-            raise Exception
-        else:
-            setattr(self, name, ToolBar(self, **menukwargs))
-            super().add_cascade(menu=getattr(self, name), **cascadekwargs)
-
-    def insert_cascade(self, index: int, name: str, *, menukwargs: dict, cascadekwargs: dict) -> None:
-        if name in ToolBar.__dict__.keys():
-            raise Exception
-        else:
-            setattr(self, name, ToolBar(self, **menukwargs))
-            super().insert_cascade(index, menu=getattr(self, name), **cascadekwargs)
-    
-    def delete(self, index1, index2=None):
-        pass
