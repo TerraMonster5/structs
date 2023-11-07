@@ -3,7 +3,7 @@ class Stack:
         self._array = []
     
     def __str__(self) -> str:
-        return f"Stack()"
+        return f"Stack(top={self.peek()}, size={self.size()})"
 
     def push(self, val) -> None:
         self._array.append(val)

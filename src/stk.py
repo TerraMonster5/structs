@@ -15,6 +15,7 @@ class ToolBar(tk.Menu):
 
             if "name" in kwargs.keys():
                 setattr(self, kwargs["name"], ToolBar(self, **kwargs["menukw"]))
+                getattr(self, kwargs["name"]).__name__ = kwargs["name"]
                 super().add("cascade", menu=getattr(self, kwargs["name"]), **kwargs["cascadekw"])
             else:
                 raise TypeError
@@ -29,7 +30,7 @@ class ToolBar(tk.Menu):
         else:
             self.add("cascade", name=name, **kwargs)
 
-    def insert(self, index, kind: str, cnf={}, **kwargs):
+    def insert(self, index: int, kind: str, cnf={}, **kwargs):
         kwargs = cnf or kwargs
 
         if kind == "cascade":
@@ -40,13 +41,14 @@ class ToolBar(tk.Menu):
 
             if "name" in kwargs.keys():
                 setattr(self, kwargs["name"], ToolBar(self, **kwargs["menukw"]))
+                getattr(self, kwargs["name"]).__name__ = kwargs["name"]
                 super().insert(index, "cascade", menu=getattr(self, kwargs["name"]), **kwargs["cascadekw"])
             else:
                 raise TypeError
         else:
             super().insert(index, kind, **kwargs)
 
-    def insert_cascade(self, index, name: str, cnf={}, **kwargs):
+    def insert_cascade(self, index: int, name: str, cnf={}, **kwargs):
         kwargs = cnf or kwargs
 
         if name in ToolBar.__dict__.keys():
@@ -54,12 +56,12 @@ class ToolBar(tk.Menu):
         else:
             self.insert(index, "cascade", name=name, **kwargs)
 
-    def delete(self, index1, index2=None):
+    def delete(self, index1: int, index2: int | None=None):
         if index2 is None:
             index2 = index1
 
-        children = self.__dict__.keys() - ToolBar.__dict__.keys()
-
-        for i in children:
-            if isinstance(getattr(self, i), ToolBar):
-                pass
+        for i in range(index1, index2+1):
+            if self.type(i) == tk.CASCADE:
+                delattr(self, self.nametowidget(self.entrycget(i, "menu")).__name__)
+        
+        super().delete(index1, index2)
