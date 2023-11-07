@@ -4,7 +4,7 @@ class ToolBar(tk.Menu):
     def __init__(self, master=None, **kwargs) -> None:
         super().__init__(master, **kwargs)
 
-    def add(self, kind: str, cnf={}, **kwargs):
+    def add(self, kind: str, cnf={}, **kwargs) -> None:
         kwargs = cnf or kwargs
 
         if kind == "cascade":
@@ -22,7 +22,7 @@ class ToolBar(tk.Menu):
         else:
             super().add(kind, **kwargs)
 
-    def add_cascade(self, name: str, cnf={}, **kwargs):
+    def add_cascade(self, name: str, cnf={}, **kwargs) -> None:
         kwargs = cnf or kwargs
 
         if name in ToolBar.__dict__.keys():
@@ -30,7 +30,7 @@ class ToolBar(tk.Menu):
         else:
             self.add("cascade", name=name, **kwargs)
 
-    def insert(self, index: int, kind: str, cnf={}, **kwargs):
+    def insert(self, index: int, kind: str, cnf={}, **kwargs) -> None:
         kwargs = cnf or kwargs
 
         if kind == "cascade":
@@ -48,7 +48,7 @@ class ToolBar(tk.Menu):
         else:
             super().insert(index, kind, **kwargs)
 
-    def insert_cascade(self, index: int, name: str, cnf={}, **kwargs):
+    def insert_cascade(self, index: int, name: str, cnf={}, **kwargs) -> None:
         kwargs = cnf or kwargs
 
         if name in ToolBar.__dict__.keys():
@@ -56,7 +56,7 @@ class ToolBar(tk.Menu):
         else:
             self.insert(index, "cascade", name=name, **kwargs)
 
-    def delete(self, index1: int, index2: int | None=None):
+    def delete(self, index1: int, index2: int | None=None) -> None:
         if index2 is None:
             index2 = index1
 
