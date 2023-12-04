@@ -1,8 +1,5 @@
+from typing import Any
 from queue import SimpleQueue
-
-__all__ = ["graphs"]
-
-import structs.graphs
 
 class SimpleStack:
     def __init__(self) -> None:
@@ -14,15 +11,18 @@ class SimpleStack:
     def push(self, val) -> None:
         self._array.append(val)
     
-    def peek(self):
+    def peek(self) -> Any:
         return self._array[-1]
 
-    def pop(self):
-        if len(self._array) > 0: return self._array.pop(-1)
+    def pop(self, b: int=0) -> Any | bool:
+        if len(self._array) > b: return self._array.pop(-1)
         else: return False
     
     def size(self) -> int:
         return len(self._array)
+    
+    def empty(self) -> bool:
+        return not len(self._array)
 
 class Graph:
     class Vertex:
