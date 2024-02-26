@@ -1,5 +1,29 @@
 from typing import Any
-from queue import SimpleQueue
+try:
+    from queue import SimpleQueue
+except:
+    class SimpleQueue:
+        def __init__(self) -> None:
+            self._array = []
+        
+        def __str__(self) -> str:
+            return f"Queue(top={self.peek()}, size={self.size()})"
+        
+        def enqueue(self, val) -> None:
+            self._array.append(val)
+        
+        def peek(self) -> Any:
+            return self._array[0]
+        
+        def dequeue(self) -> Any | bool:
+            if len(self._array) > b: return self._array.pop(0)
+            else: return False
+        
+        def size(self) -> int:
+            return len(self._array)
+        
+        def empty(self) -> bool:
+            return not len(self._array)
 
 class SimpleStack:
     def __init__(self) -> None:
