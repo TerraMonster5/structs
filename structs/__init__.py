@@ -119,3 +119,27 @@ class Graph:
             self.dijkstras(new[1], table)
 
         return table
+
+class BinaryTree:
+    def __init__(self, val, root=False):
+        self.__val = None
+        self.__left = None
+        self.__right = None
+    
+    def addLeft(self, val):
+        self.__left = BinaryTree(val)
+    
+    def addRight(self, val):
+        self.__right = BinaryTree(val)
+    
+    def breadth(self):
+        pass
+    
+    def preorder(self, lst):
+        pass
+    
+    def inorder(self):
+        pass
+    
+    def postorder(self):
+        pass
