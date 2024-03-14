@@ -67,10 +67,10 @@ class Graph:
         
         for edgeVertex in self.vertices[vertex].adjacency:
             if edgeVertex not in visited:
-                q.put_nowait(edgeVertex)
+                q.enqueue(edgeVertex)
                 visited.append(edgeVertex)
 
-        if q.qsize() > 0:
+        if q.size() > 0:
             self.breadth(q.get_nowait(), visited, q)
         
         return visited
