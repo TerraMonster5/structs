@@ -122,24 +122,33 @@ class Graph:
 
 class BinaryTree:
     def __init__(self, val, root=False):
-        self.__val = None
-        self.__left = None
-        self.__right = None
+        self.__val = val
+        self.__left: BinaryTree
+        self.__right: BinaryTree
     
-    def addLeft(self, val):
+    def setLeft(self, val):
         self.__left = BinaryTree(val)
     
-    def addRight(self, val):
+    def setRight(self, val):
         self.__right = BinaryTree(val)
     
     def breadth(self):
         pass
     
-    def preorder(self, lst):
-        pass
+    def preorder(self, lst=[]):
+        lst.append(self.__val)
+        if "__left" in self.__dict__.keys(): lst = self.__left.preorder(lst)
+        if "__right" in self.__dict__.keys(): lst = self.__right.preorder(lst)
+        return lst
     
-    def inorder(self):
-        pass
+    def inorder(self, lst=[]):
+        if "__left" in self.__dict__.keys(): lst = self.__left.preorder(lst)
+        lst.append(self.__val)
+        if "__right" in self.__dict__.keys(): lst = self.__right.preorder(lst)
+        return lst
     
-    def postorder(self):
-        pass
+    def postorder(self, lst=[]):
+        if "__left" in self.__dict__.keys(): lst = self.__left.preorder(lst)
+        if "__right" in self.__dict__.keys(): lst = self.__right.preorder(lst)
+        lst.append(self.__val)
+        return lst
