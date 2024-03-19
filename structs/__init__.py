@@ -121,34 +121,52 @@ class Graph:
         return table
 
 class BinaryTree:
-    def __init__(self, val, root=False):
-        self.__val = val
-        self.__left: BinaryTree
-        self.__right: BinaryTree
+    def __init__(self, val):
+        self._val = val
+        self._left: BinaryTree
+        self._right: BinaryTree
     
-    def setLeft(self, val):
-        self.__left = BinaryTree(val)
+    def __setLeft(self, val):
+        self._left = BinaryTree(val)
     
-    def setRight(self, val):
-        self.__right = BinaryTree(val)
+    def __setRight(self, val):
+        self._right = BinaryTree(val)
     
     def breadth(self):
         pass
     
     def preorder(self, lst=[]):
-        lst.append(self.__val)
-        if "__left" in self.__dict__.keys(): lst = self.__left.preorder(lst)
-        if "__right" in self.__dict__.keys(): lst = self.__right.preorder(lst)
+        lst.append(self._val)
+        if "_left" in self.__dict__.keys(): lst = self._left.preorder(lst)
+        if "_right" in self.__dict__.keys(): lst = self._right.preorder(lst)
         return lst
     
     def inorder(self, lst=[]):
-        if "__left" in self.__dict__.keys(): lst = self.__left.preorder(lst)
-        lst.append(self.__val)
-        if "__right" in self.__dict__.keys(): lst = self.__right.preorder(lst)
+        if "_left" in self.__dict__.keys(): lst = self._left.preorder(lst)
+        lst.append(self._val)
+        if "_right" in self.__dict__.keys(): lst = self._right.preorder(lst)
         return lst
     
     def postorder(self, lst=[]):
-        if "__left" in self.__dict__.keys(): lst = self.__left.preorder(lst)
-        if "__right" in self.__dict__.keys(): lst = self.__right.preorder(lst)
-        lst.append(self.__val)
+        if "_left" in self.__dict__.keys(): lst = self._left.preorder(lst)
+        if "_right" in self.__dict__.keys(): lst = self._right.preorder(lst)
+        lst.append(self._val)
         return lst
+
+class BinarySearchTree(BinaryTree):
+    def __init__(self, val):
+        super().__init__(val)
+        self._left: BinarySearchTree
+        self._right: BinarySearchTree
+
+    def addVal(self, val):
+        if val < self._val:
+            if "_left" in self.__dict__.keys():
+                self._left.addVal(val)
+            else:
+                self._left = BinarySearchTree(val)
+        if val > self._val:
+            if "_right" in self.__dict__.keys():
+                self._right.addVal(val)
+            else:
+                self._right = BinarySearchTree(val)
