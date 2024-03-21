@@ -13,7 +13,7 @@ class SimpleQueue:
     def peek(self) -> Any:
         return self._array[0]
 
-    def dequeue(self) -> Any | bool:
+    def dequeue(self, b: int=0) -> Any | bool:
         if len(self._array) > b: return self._array.pop(0)
         else: return False
 
@@ -71,7 +71,7 @@ class Graph:
                 visited.append(edgeVertex)
 
         if q.size() > 0:
-            self.breadth(q.get_nowait(), visited, q)
+            self.breadth(q.dequeue(), visited, q)
         
         return visited
 
