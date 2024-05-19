@@ -1,7 +1,8 @@
 import tkinter as tk
 
 class ToolBar(tk.Menu):
-    def __init__(self, master=None, **kwargs) -> None:
+    def __init__(self, master=None, cnf={}, **kwargs) -> None:
+        kwargs = cnf or kwargs
         super().__init__(master, **kwargs)
 
     def add(self, kind: str, cnf={}, **kwargs) -> None:
