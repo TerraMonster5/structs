@@ -1,6 +1,6 @@
 from typing import Any
 
-class SimpleQueue:
+class Queue:
     def __init__(self) -> None:
         self._array = []
 
@@ -23,7 +23,7 @@ class SimpleQueue:
     def empty(self) -> bool:
         return not len(self._array)
 
-class SimpleStack:
+class Stack:
     def __init__(self) -> None:
         self._array = []
 
@@ -61,7 +61,7 @@ class Graph:
         temp = ", ".join([str(x) for x in self.vertices])
         return f"Graph({temp})"
 
-    def breadth(self, vertex: int, visited: list=[], q: SimpleQueue=SimpleQueue()) -> list:
+    def breadth(self, vertex: int, visited: list=[], q: Queue=Queue()) -> list:
         if vertex not in visited:
             visited.append(vertex)
         
@@ -75,7 +75,7 @@ class Graph:
         
         return visited
 
-    def depth(self, vertex: int, visited: list=[], s: SimpleStack=SimpleStack()) -> list:
+    def depth(self, vertex: int, visited: list=[], s: Stack=Stack()) -> list:
         if vertex not in visited:
             visited.append(vertex)
         
