@@ -78,5 +78,5 @@ class AffixedEntry(ttk.Entry):
         self.__preffix = preffix
         self.__suffix = suffix
 
-        self.insert(1, suffix)
-        self.insert(1, preffix)
+        self.insert(0, suffix)
+        self.insert(0, preffix)
