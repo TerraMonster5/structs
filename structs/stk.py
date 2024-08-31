@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 
 class ToolBar(tk.Menu):
     def __init__(self, master=None, cnf={}, **kwargs) -> None:
@@ -67,3 +68,15 @@ class ToolBar(tk.Menu):
                 delattr(self, self.nametowidget(self.entrycget(i, "menu")).__name__)
         
         super().delete(index1, index2)
+
+class AffixedEntry(ttk.Entry):
+    def __init__(self, master=None, preffix="", suffix="", cnf={}, **kwargs) -> None:
+        kwargs = cnf or kwargs
+
+        super().__init__(master, **kwargs)
+
+        self.__preffix = preffix
+        self.__suffix = suffix
+
+        self.insert(1, suffix)
+        self.insert(1, preffix)
