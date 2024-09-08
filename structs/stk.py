@@ -66,7 +66,7 @@ class ToolBar(tk.Menu):
         for i in range(index1, index2+1):
             if self.type(i) == tk.CASCADE:
                 delattr(self, self.nametowidget(self.entrycget(i, "menu")).__name__)
-        
+
         super().delete(index1, index2)
 
 class AffixedEntry(ttk.Entry):
@@ -80,3 +80,19 @@ class AffixedEntry(ttk.Entry):
 
         self.insert(0, suffix)
         self.insert(0, preffix)
+
+        self.__previous = self.get()
+
+        self.bind("<<Modified>>", self.changedEvent)
+        self.bind("")
+
+    def changedEvent(self, event) -> None:
+        if not (self.get().startswith(self.__preffix) and self.get().endswith(self.__suffix)):
+            self.delete(0, tk.END)
+            self.insert(0, self.__previous)
+            return
+        
+        self.__previous = self.get()
+
+    def clickedEvent(self, event) -> None:
+        pass
