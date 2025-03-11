@@ -5,7 +5,7 @@ class Queue:
         self._array = []
 
     def __str__(self) -> str:
-        return f"Queue(top={self.peek()}, size={self.size()})"
+        return f"Queue(top={self.peek()}, len={len(self)})"
 
     def enqueue(self, val) -> None:
         self._array.append(val)
@@ -17,18 +17,15 @@ class Queue:
         if len(self._array) > b: return self._array.pop(0)
         else: return False
 
-    def size(self) -> int:
+    def __len__(self):
         return len(self._array)
-
-    def empty(self) -> bool:
-        return not len(self._array)
 
 class Stack:
     def __init__(self) -> None:
         self._array = []
 
     def __str__(self) -> str:
-        return f"Stack(top={self.peek()}, size={self.size()})"
+        return f"Stack(top={self.peek()}, len={len(self)})"
 
     def push(self, val) -> None:
         self._array.append(val)
@@ -40,11 +37,8 @@ class Stack:
         if len(self._array) > b: return self._array.pop(-1)
         else: return False
 
-    def size(self) -> int:
+    def __len__(self):
         return len(self._array)
-
-    def empty(self) -> bool:
-        return not len(self._array)
 
 class Graph:
     class Vertex:
@@ -70,7 +64,7 @@ class Graph:
                 q.enqueue(edgeVertex)
                 visited.append(edgeVertex)
 
-        if q.size() > 0:
+        if len(q) > 0:
             self.breadth(q.dequeue(), visited, q)
         
         return visited
