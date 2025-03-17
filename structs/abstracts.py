@@ -1,12 +1,12 @@
 from typing import Any
 
-class _Singleton(type):
-    _instances = {}
+class Singleton:
+    instance = None
 
-    def __call__(cls, *args, **kwargs):
-        if cls not in cls._instances:
-            cls._instances[cls] = super(_Singleton, cls).__call__(*args, **kwargs)
-        return cls._instances[cls]
+    @classmethod
+    def show(cls, cnf: dict={}, **kwargs) -> Any:
+        kwargs = cnf or kwargs
 
-def singleton(cls):
-    return _Singleton(cls.__name__, cls.__bases__, dict(cls.__dict__))
+        if cls.instance is None:
+            cls.instance = cls(**kwargs)
+        return cls.instance
